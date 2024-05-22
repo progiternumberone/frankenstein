@@ -10,7 +10,7 @@ requirejs.config({
       for those cases.
 	*/
 	
-	baseUrl : "/igor/frankenstein",
+	baseUrl : "/frankenstein",
 	//baseUrl : "https://s3.glo.texas.gov/frankenstein",
 	paths : {
 		backbone            :	"lib/backbone-min"
