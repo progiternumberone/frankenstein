@@ -121,7 +121,6 @@ function log(str) {
 }
 var Marionette = null;
 FrankensteinConfig.theme = FrankensteinConfig.theme ? "." + FrankensteinConfig.theme : "";
-console.log( FrankensteinConfig.root + "../css/styles" + FrankensteinConfig.theme + ".min" );
 require([ "bootstrap" , "marionette" , "app" , "routes"
 			//,"https://s3.glo.texas.gov/uilib/js/script." + FrankensteinConfig.theme + ".min.js"
 			//,"css!https://s3.glo.texas.gov/uilib/css/styles" + FrankensteinConfig.theme + ".min" 
