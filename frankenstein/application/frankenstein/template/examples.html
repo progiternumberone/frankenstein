@@ -1,0 +1,112 @@
+<!--
+<form style="text-align: center;" action="leases.html" method="post" onsubmit="window.location = 'leases.html#lease/' + $('#leaseSearch').val(); return false;">
+-->
+<div class="row" style="text-align: center; background-color: #fff; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h3>Data List View</h3>
+				<p>This data list is connected to lease data and a card style item template.</p>
+			</div>
+		</div>
+		<a id="viewUnassigned" href="#lease" class="btn btn-default" style="display: inline-block;">
+			View Leases
+		</a>
+		<br /><br />
+		<label>
+			Lookup One
+		</label>
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+				<input class="form-control" placeholder="CE20160038" id="leaseSearch" onchange="$(this).val($(this).val()/*.replace(/[^0-9]/g , '')*/); $('#leaseSearchBtn').val( 'View Lease Card #' + $(this).val());" />
+			</div>
+		</div>
+		<br />
+		<input type="submit" id="leaseSearchBtn" class="btn btn-info" value="View Lease Card" />
+	</div>
+</div>
+<div class="row" style="text-align: center; background-color: #eee; padding: 40px 0;">
+	<div class="col-xs-12">
+	
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h3>Master Detail View w/ DataTables</h3>
+				<p>This master-detail is connected to people data and shows a second master-detail along with the first ones detail view.</p>
+				<p>BBGrid files are also in Frankenstein for requireJS inclusion, but since it is already an extendable Backbone View you would use it normally.</p>
+			</div>
+		</div>
+		<a id="viewMasterDetail" href="#people/read" class="btn btn-default" style="display: inline-block;">
+			People &amp; Support Objects in BBGrid
+		</a>
+		<br />
+		<br />
+		<a id="viewMasterDetail" href="#dtpeople/read" class="btn btn-default" style="display: inline-block;">
+			People &amp; Support Objects in DataTables
+		</a>
+		<br />
+		<br />
+		<a id="viewMasterDetail2" href="#people/edit" class="btn btn-default" style="display: inline-block;">
+			People &amp; Support Objects w/ Form View as Detail
+		</a>
+	</div>
+</div>
+<div class="row" style="text-align: center; background-color: #fff; padding: 40px 0;">
+	<div class="col-xs-12">
+	
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h3>Form View</h3>
+				<p>View all the details and then edit them. You can also display just a form without the edit toggle.</p>
+			</div>
+		</div>
+		<a href="#person/1" class="btn btn-default" style="display: inline-block;">
+			Person Form
+		</a>
+	</div>
+</div>
+<div class="row" style="text-align: center; background-color: #eee; padding: 40px 0;">
+	<div class="col-xs-12">
+	
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h3>Bootstrap Wizard View</h3>
+				<p>Use the Bootstrap Wizard</p>
+			</div>
+		</div>
+		<a href="#wizard" class="btn btn-default" style="display: inline-block;">
+			Start Wizard
+		</a>
+	</div>
+</div>
+<div class="row" style="text-align: center; background-color: #eee; padding: 40px 0;">
+	<div class="col-xs-12">
+	
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h3>Stated View</h3>
+				<p>Easy way to show one template or view at a time in a single region</p>
+			</div>
+		</div>
+		<a href="#stated" class="btn btn-default" style="display: inline-block;">
+			Start Stated View
+		</a>
+	</div>
+</div>
+<div class="row" style="text-align: center; background-color: #fff; padding: 40px 0;">
+	<div class="col-xs-12">
+	
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h3>IGOR/Mineral Award GLO 3 Entry</h3>
+				<p>Satellite application for Igor/Mineral Award GLO3Entry app</p>
+			</div>
+		</div>
+		<% if( window.location.href.indexOf( "/application/" ) > -1 ) { %>
+			<a href="../igor" class="btn btn-default" style="display: inline-block;">
+		<% } else {%>
+			<a href="application/igor" class="btn btn-default" style="display: inline-block;">
+		<% } %>
+			Start
+		</a>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<div class="row page-title">
+	<div class="col-sm-8">
+		<span class="lead">Incomplete Report for:</span>
+		<br />
+		<h2><%= companyName %></h2>
+	</div>
+	<div class="col-sm-4">
+		<div class="panelx panel-defaultx">
+			<div class="panel-bodyx">
+				<div class="row">
+					<div class="col-xs-3 text-right">
+						<strong>BAN</strong>
+					</div>
+					<div class="col-xs-9">
+						<%= ban %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-3 text-right"><strong>Received</strong></div>
+					<div class="col-xs-9">
+						<%= receivedDate %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-3 text-right"><strong>Tax Id</strong></div>
+					<div class="col-xs-9">
+						<%= reportingCompanyTaxId %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-3 text-right"><strong>Customer Id</strong></div>
+					<div class="col-xs-9">
+						<%= customerId %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-3">
+						&nbsp;
+					</div>
+					<div class="col-xs-9">
+						<% if( ! reportNumber ) { %>
+							<a href="#company/<%= ban %>/<%= encodeURIComponent( receivedDate ) %>" class="btn btn-link btn-xs" style="color: white;">[ Edit Company ]</a>
+						<% } else { %>
+							<a href="#company/<%= reportNumber %>" class="btn btn-link btn-xs" style="color: white;">[ Edit Company ]</a>
+						<% } %>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

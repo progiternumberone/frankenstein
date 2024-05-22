@@ -1,0 +1,121 @@
+<style type="text/css">
+	.attributes p {
+		font-size: 10px;
+		margin: 0;
+	}
+	.models {
+		padding: 0;
+	}
+	.models > li > ul {
+		margin-left: 30px;
+	}
+	.models > li {
+		list-style: none;
+		border: solid 1px black;
+		margin: 40px 0;
+		padding: 0 10px;
+	}
+</style>
+<div class="row" style="background-color: #fff; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Models &amp; Collections</h2>
+					<p>Detail of the available BackboneJS models and collections</p>
+					<ul class="models">
+						<li>
+							<h4>GLALease <div class="pull-right">http://localhost:65254/api/GLALease/</div></h4>
+							<p>A GLA Lease <strong>Model fetches and saves</strong>.</p>
+							<ul class="attributes">
+								<li>LeaseStatus</li>
+								<li>Category</li>
+								<li>AutoBillFlag</li>
+								<li>PaymentFrequency</li>
+								<li>PeriodicPaymentAmount</li>
+								<li>ControlNums<p>array</p></li>
+								<li>GLAs<p>array</p></li>
+								<li>username</li>
+								<li>justSaved</li>
+							</ul>
+							<h4>GLALeasesInstance</h4>
+							<p>A shared instance of a collection of lease</p>
+						</li>
+						<li>
+							<h4>MineralAwardCompany <div class="pull-right">http://localhost:65254/api/company/</div></h4>
+							<p>Information about a company from MCDH.vewBANTableData. Set BAN before fetching. <strong>Fetches only</strong>.</p>
+							<ul class="attributes">
+								<li>*BAN</li>
+								<li>ReportNumber<p>The related MineralAwardReport ReportNumber</p></li>
+								<li>ReceivedDate</li>
+								<li>ReportingCompanyTaxId</li>
+								<li>CompanyName</li>
+								<li>CustomerId</li>
+							</ul>
+							<h4>MineralAwardCompanyInstance</h4>
+							<p>A shared instance of MineralAwardCompany</p>
+						</li>
+						<li>
+							<h4>MineralAwardEntry <div class="pull-right">N/A</div></h4>
+							<p>A Mineral Award GLO3 entry record for ALPS.tblLeaseMineralPaymentReport. <strong>No fetch nor save</strong>. It is saved via the MineralAwardReport save.</p>
+							<ul class="attributes">
+								<li>LeaseNumber</li>
+								<li>ReportProductType</li>
+								<li>GLACode</li>
+								<li>ProductionYearMonth</li>
+								<li>PaymentAmount</li>
+								<li>cancelNotAllowed</li>
+							</ul>
+							<h4>MineralAwardEntries</h4>
+							<p>A collection of MineralAwardEntry</p>
+							<h4>MineralAwardEntriesInstance</h4>
+							<p>A shared instance of MineralAwardEntries</p>
+						</li>
+						<li>
+							<h4>MineralAwardGLALookup <div class="pull-right">http://localhost:65254/api/GLA/</div></h4>
+							<p>Fetches a GLACode from given ReportProductType <strong>Fetches only</strong>.</p>
+							<ul class="attributes">
+								<li>*ReportProductType</li>
+								<li>GLACode</li>
+							</ul>
+						</li>
+						<li>
+							<h4>MA3LeaseLookup <div class="pull-right">http://localhost:65254/api/lease/</div></h4>
+							<p>Sets valid to true if the LeaseNumber is a real lease <strong>Fetches only</strong>.</p>
+							<ul class="attributes">
+								<li>*LeaseNumber</li>
+								<li>valid</li>
+							</ul>
+						</li>
+						<li>
+							<h4>MineralAwardReport <div class="pull-right">http://localhost:65254/api/report</div></h4>
+							<p>A Mineral Award GLO3 report with company and entries. <strong>Collection fetches and Model saves</strong>.</p>
+							<ul class="attributes">
+								<li>*ReportNumber</li>
+								<li>Entries<p>JSON of a MineralAwardEntries</p></li>
+								<li>Company<p>JSON of a MineralAwardCompany</p></li>
+								<li>ReportAmount</li>
+								<li>UserName</li>
+								<li>isComplete</li>
+							</ul>
+							<h4>MineralAwardReportsInstance</h4>
+							<p>A shared instance of a collection of MineralAwardReport</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="background-color: #eee; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2></h2>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

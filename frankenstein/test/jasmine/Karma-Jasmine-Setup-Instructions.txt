@@ -1,0 +1,24 @@
+KARMA SET UP
+1. Install NodeJS - http://nodejs.org
+2. Start > CMD
+3. cd C:\Program Files\nodejs\ ( or whatever path to folder with node.exe that you just installed is )
+4. [run cmd] npm install -g karma-cli
+5. [run cmd] npm install -g phantomjs
+6. [run cmd] npm install karma-jasmine -save-dev
+7. [run cmd] npm install karma-requirejs -save-dev
+8. [run cmd] npm install karma-sinon -save-dev
+9. [run cmd] npm install karma-phantomjs-launcher -save-dev
+10. [run cmd] npm install karma-chrome-launcher -save-dev
+
+
+RRAC2_UI CONFIGURATIONIZING
+1. Open [RRAC2_UI_FOLDER_PATH]/WebContent/assets/js/tests/jasmine/karma.conf.rrac2_ui.js
+2. Change the "basePath" value on line 8 to the location of you [RRAC2_UI_FOLDER_PATH]
+
+RUNNING TEST
+1. Start > CMD
+2. cd C:\Program Files\nodejs\node_modules\karma ( or whatever your path to karma may be )
+
+3. [run cmd] karma start C:/Users/JOKing/Documents/repo/frankenstein/test/jasmine/karma.conf.rrac2_ui.js
+cd C:\Program Files\nodejs\node_modules\karma
+karma start Q:/frankenstein/test/jasmine/karma.conf.rrac2_ui.js

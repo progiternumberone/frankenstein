@@ -1,0 +1,152 @@
+
+.gridForm{
+	height:100%;
+	background-color: white;	
+	border-bottom: 2px solid #dddddd; 
+}
+
+.gridFixedHeaderPanel{
+	background-color: #F5F5F5; 
+	position: relative;	
+}
+
+.gridFixedHeaderPanel.disabled{
+	display:none;	
+}
+
+.gridFixedHeader{
+	position: relative; 
+	margin-right: 16px;
+}
+
+.gridContentsPanel{
+	height: calc(100% - 31px);  /* reduce percentage height from height of new fixed header */
+	overflow-y: scroll; 
+	overflow-x: auto;
+	position: relative;
+}
+
+.gridContentsPanel.tallHeader{
+	height: calc(100% - 47px);  /* reduce percentage height from height of larger header */
+}
+
+.gridContents{
+	margin-bottom: 5px;
+}
+
+.spinner{
+	padding-top: 5px; 
+	padding-bottom: 5px; 
+	text-align:center;
+}
+
+.rdg-menu{
+	position: absolute; 
+	top: 0px; 
+	right: -1px;	
+	height: 100%;	
+}
+
+.rdg-menu .btn{
+	padding-left: 0px; 
+	padding-right:2px; 
+	padding-top:  4px;
+	background-color: rgb(245, 245, 245);
+	border-radius: 0px;
+	font-size: 13px;
+	height: 100%;
+}
+
+.rdg-menu .btn .glyphicon-minus{
+	display: block; 
+	margin-left: 0px; 
+	line-height: .4;
+	color: #888888;  /*added softer color*/
+}
+
+.rdg-menu .dropdown-menu{
+	font-size: 13px;
+}
+
+.rdg-menu .dropdown-menu a > span:first-child{   
+	margin-right:10px
+}
+
+.rdg-menu .dropdown-menu .rdg-export-icon{
+	margin-left:-5px; 
+	margin-right:6px;	
+}
+
+.rdg-menu .hide{
+	display:none;
+}
+
+.rdg-sort{
+	display:none;
+	color: rgb(157, 157, 157); 
+	position: absolute; 
+	top:6px; 
+	right:20px;">
+}
+
+.rdg-filter{
+	top: 5px;
+	right: 5px;
+	position: absolute;	
+}
+
+.rdg-filter .dropdown-menu{
+	padding: 15px; 
+	padding-bottom: 0px;
+	left: -110px;
+}
+
+.rdg-column{
+	position:relative;
+	overflow-y:visible !important;
+	overflow-x:visible !important;
+}
+
+.rdg-select{
+	position:relative;
+	overflow-y:visible !important;
+	overflow-x:visible !important;
+	width: 30px;
+	text-align: center;
+}
+
+.bbGrid-multiselect-control{
+	width: 30px;
+	text-align: center;
+}
+
+.bbGrid-row .checked{
+	
+}
+
+.bbGrid-row.warning{
+	font-weight: bold;
+}
+
+.bbGrid-noRows{
+	display: none;
+}
+
+.bbGrid-noRows.visible{
+	display: table-row;
+}
+
+.glyphicon.glyphicon-filter.filtered{
+	color: inherit;
+}
+
+.glyphicon.glyphicon-filter{
+	color: rgb(157, 157, 157);
+}
+
+td .popover-content{
+	overflow-y: auto; min-height: 50px; max-height: 100px;
+}
+
+td .popover-title{
+	padding: 0px 14px; background-color: inherit; border-bottom: 0px;

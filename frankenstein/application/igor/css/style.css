@@ -1,0 +1,125 @@
+@charset "utf-8";
+/* CSS Document */
+.obviousTest {
+	border: solid 2px red;
+}
+.pointer {
+	cursor: pointer;
+}
+
+header {
+	background-color: #efefef;
+/*	margin-bottom: 20px;*/
+	border-top: solid 2px #9e8b56;
+	border-bottom: solid 2px #9e8b56;
+}
+
+#Header-main{
+	/*background-color:#E7C4A9;*/
+	/*text-align:center;*/
+	/*border-bottom: solid 0px black;
+	padding-bottom: 10px;*/
+	/*margin-bottom: 10px;*/
+	padding: 15px 0;
+}
+/*#Header-main img {
+	height: 100px;
+}*/
+
+header h1 {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	font-size: 22px;
+	font-weight: 700;
+	color: #9e8b56;
+	margin-top: 5px;
+}
+
+body{
+	/*background-color:#AD9B8D;*/
+}
+
+.btn.main-nav-btn {
+	float: right;
+	margin-left: 10px;
+	padding: 10px 16px;
+    font-size: 14px;
+}
+.logo {
+	float: left;
+	margin: 0 10px 0 0;
+}
+.label {
+	color: black;
+	text-align: right;
+}
+.edit {
+	display: none;
+}
+
+table tr:nth-child(2n) td {
+	background-color: #f4f4f4;
+	
+}
+
+table.dataTable tr.selected td {
+	background-color: #08C;
+}
+	
+
+
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
+	padding: 0;
+	/*
+	width: 290px;
+	float: left;
+	margin: 15px;
+	*/
+}
+.card header, .card footer {
+	background-color: #B9AC8A;
+	padding: 5px 16px;
+}
+.card > div {
+	padding: 10px 16px;
+}
+
+body .bbGrid-grid caption {
+	font-size: 14px;
+	font-weight: inherit;
+    line-height: inherit;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: inherit;
+    text-align: left;
+}
+.bbGrid-grid {
+	border-top: none !important;
+	border-right: none !important;
+}
+.table-curved td:last-child  {
+	border-right: 1px solid #ccc;
+}
+.bbGrid-grid .bbGrid-grid-head th, .bbGrid-grid .bbGrid-grid-head td {
+	text-align: center;
+	background-color: white !important;
+	border: none;
+}
+.bbGrid-row td {
+	text-align: center;
+	padding: 15px 3px !important;
+	vertical-align: middle !important;
+}
+
+.page-title {
+	background-color: #9c8b5d; 
+	color: white; 
+	padding-top: 20px; 
+	padding-bottom: 20px;
+}
+
+.page-title h2 {
+	margin: 0;
+}

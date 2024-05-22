@@ -1,0 +1,565 @@
+
+<div class="row" style="background-color: #fff; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Extendable Views</h2>
+					Details of how to use the views available with Frankenstein. As additional generic functionality is needed build it inside the main Frankenstein app to be used in your application and others.
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="background-color: #fff; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Data List View</h2>
+					<p>A view that can be extended that provides a Marionette.CollectionView with built in item edit toggling and events upon input changes and save.</p>
+					<a href="#dataListInfo" class="btn btn-sm btn-info" data-toggle="collapse">
+						View Info
+					</a>
+					<a href="http://shemp:7990/projects/WT/repos/frankenstein/browse/views/dataList/view.js?at=refs%2Ftags%2Fv0.1.0" target="_blank" class="btn btn-sm btn-default">
+						View Code
+					</a>
+					<div id="dataListInfo" class="collapse">
+						<h3>Properties</h3>
+						<dl>
+							<dt>collection</dt>
+								<dd>The Backbone.Collection to display</dd>
+							<dt>childViewOptions -> detailTemplate</dt>
+								<dd>A compiled template that will display the attributes of the Model of the collection as needed by your app</dd>
+							<dt>onChildviewSave</dt>
+								<dd>Custom function called when element with class "save" is clicked. The model is provided as a parameter.</dd>
+							<dt>onChildviewInputChange</dt>
+								<dd>Custom function called when an input, select, or textarea is changed. The view and the e.target are provided as parameters. <br /><span class="bg-primary">This is the best place to update the model's attributes.</span></dd>
+							<dt>itemPerGridRow</dt>
+								<dd>The count of items to insert a &lt;br style="clear: both;"&gt; after</dd>
+						</dl>
+						<h3>Methods</h3>
+						<dl>
+							<dt>addClearBreaks()</dt>
+								<dd>Adds &lt;br style="clear: both;" /&gt; after every <em>itemPerGridRow</em> number of elements</dd>
+						</dl>
+						<h3>Child View Methods</h3>
+						<dl>
+							<dt>disableSave( text )</dt>
+								<dd>Disables .saveItem element and puts [text] into innerHTML
+								<p class="bg-warning">Currently only accessible through the input:changed event's provided Marionette.View</p></dd>
+							<dt>enableSave( text )</dt>
+								<dd>Enables .saveItem element and puts [text] into innerHTML
+								<p class="bg-warning">Currently only accessible through the input:changed event's provided Marionette.View</p></dd>
+						</dl>
+						<h3>Template Conventions</h3>
+						<dl>
+							<dt>.toggleEdit</dt>
+								<dd>Put this class on the element you want to toggle editing</dd>
+							<dt>.edit</dt>
+								<dd>Put this class on elements you want only show when editing</dd>
+							<dt>.notedit</dt>
+								<dd>Put this class on elements you want only show when not editing</dd>
+							<dt>.save</dt>
+								<dd>Put this class on the element you want to trigger a save</dd>
+							<dt>[input's id]</dt>
+								<dd>Make each input's id attribute the same as the model's attribute name to make data changes super easy inside onInputChange.</dd>
+						</dl>
+						<pre>
+							&lt;a href="#" class="btn btn-primary toggleEdit notedit">Edit&lt;/a><br />
+							&lt;a href="#" class="btn btn-primary toggleEdit edit">Cancel&lt;/a><br />
+							&lt;a href="#" class="btn btn-primary saveItem edit">Save&lt;/a>
+						</pre>
+						<h3>Events</h3>
+						<dl>
+							<dt>childview:input:changed</dt>
+								<dd>
+									Triggers when an input element from the detailTemplate is changed
+									<br />
+									Delivered parameters
+									<ol>
+										<li>Marionette.View of item</li>
+										<li>DOM Element which changed</li>
+									</ol>
+								</dd>
+							<dt>childview:save</dt>
+								<dd>
+									Triggered when .save is clicked
+									<br />
+									Delivered parameters
+									<ol>
+										<li>Backbone.Model of item</li>
+									</ol>
+								</dd>
+						</dl>
+						<pre>
+						var LeasesView = DataListView.extend({<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;collection: collection<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;,itemPerRow: 2<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;,childViewOptions: function( model , idx ) {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template: detailTemplate<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,className: "cardContainer col-sm-6 col-xs-10 col-xs-offset-1 col-sm-offset-0"<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;,onChildviewInputChange: function( view , el ) {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; view.model.set( el.id , el.value );<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;,onChildviewSave: function( view ) {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;view.model.save();<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						});
+						</pre>
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="background-color: #eee; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Master Detail View</h2>
+					<p>A Marionette View that provides a Master Detail view that uses DataTables.net for the Master list and a provided template or control for the detail view.</p>
+					<a href="#masterDetailInfo" class="btn btn-sm btn-info" data-toggle="collapse">
+						View Info
+					</a>
+					<a href="http://shemp:7990/projects/WT/repos/frankenstein/browse/views/masterDetail/view.js?at=refs%2Ftags%2Fv0.1.0" target="_blank" class="btn btn-sm btn-default">
+						View Code
+					</a>
+					<div id="masterDetailInfo" class="collapse">
+						<h3>Properties</h3>
+						<dl>
+						<dl>
+							<dt>collection</dt>
+								<dd>The Backbone.Collection to display</dd>
+							<dt>template</dt>
+								<dd>A compiled template with a master, detail, and empty region. The master region must contain the table that will hold the DataTable.</dd>
+							<dt>detailTemplate</dt>
+								<dd>A compiled template that will be used to create a child view in the detail region</dd>
+							<dt>detailView</dt>
+								<dd>A control to be used as a child view in the detail region (detailTemplate must not be set)</dd>
+							<dt>autoRefresh</dt>
+								<dd>Tell the view to auto rerender upon collection reset event</dd>
+							<dt>datatablesConfig</dt>
+								<dd>Normal datatables config per <a href="https://datatables.net/">datatables.net documentation</a></dd>
+						</dl>
+						
+						<h3>Methods</h3>
+						<dl>	
+							<dt>renderDetails( model )</dt>
+								<dd>Render the detail view with the provided Model</dd>
+							<dt>redraw( allRows:boolean )</dt>
+								<dd>If allRows then redraw the data table, else call data table invalidate on current row.</dd>
+							<dt>showMaster() / hideMaster()</dt>
+								<dd>jQuery shows/hides the master region/element and triggers "show:master"/"hide:master"</dd>
+							<dt>showDetail() / hideDetail()</dt>
+								<dd>jQuery shows/hides the detail region/element and triggers "show:detail"/"hide:detail"</dd>
+							<dt>showEmpty() / hideEmpty()</dt>
+								<dd>jQuery shows/hides the empty region/element and triggers "show:empty"/"hide:empty"</dd>
+						</dl>
+						
+						<h3>Events</h3>
+						<dl>
+							<dt>render:detail</dt>
+								<dd>
+									Triggers when a row is clicked in the Master list
+									<br />
+									<strong>Delivered parameters</strong>
+									<ol>
+										<li>Backbone.Model of item</li>
+									</ol>
+								</dd>
+							<dt>render:master</dt>
+								<dd>
+									Triggers when Master list is displayed
+									<br />
+									<strong>Delivered parameters</strong>
+									<ol>
+										<li>The view you have declared</li>
+									</ol>
+								</dd>
+							<dt>exit:detail</dt>
+								<dd>
+									Triggers when element with class "exit" in the detail view is clicked
+									<br />
+									<pre>
+										childViewEvents: {<br />
+										&nbsp;&nbsp;"exit:detail": "exitDetail"<br />
+										}<br />
+										,exitDetail: function() {}
+									</pre>
+								</dd>
+							<dt>show:master</dt>
+								<dd>
+									Triggers when master region element is shown
+								</dd>
+							<dt>hide:master</dt>
+								<dd>
+									Triggers when master region element is hidden
+								</dd>
+							<dt>show:detail</dt>
+								<dd>
+									Triggers when detail region element is shown
+								</dd>
+							<dt>hide:detail</dt>
+								<dd>
+									Triggers when detail region element is hidden
+								</dd>
+							<dt>show:empty</dt>
+								<dd>
+									Triggers when empty region element is shown
+								</dd>
+							<dt>hide:empty</dt>
+								<dd>
+									Triggers when empty region element is hidden
+								</dd>
+						</dl>
+						<pre>
+							var MasterDetail_People = new (MasterDetailView.extend({<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;collection: PeopleCollectionInstance<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,template: DatatablesTemplate<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,regions: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;master: ".master"<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,detail: ".detail"<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,empty: ".empty"<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,detailTemplate: DetailTemplate<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,autoRefresh: true<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,datatablesConfig: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;columns: [<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ "data" : "attributes.EmployeeID" , "visible" : false }<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,{ "data" : "attributes.FName" }<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,{ "data" : "attributes.LName" }<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,{ "data" : "attributes.Program" }<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,buttons: [<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'excel','pdf'<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,childViewEvents: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"exit:detail": "exitDetail"<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,exitDetail: function() {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.hideDetail();<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;App.getView().getRegion( "page2Region" ).empty();<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.showMaster();<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,onRenderDetail: function( model ) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;App.navigate( "dtpeople/read/" + model.id , { trigger : false } );<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.hideMaster();<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							}));<br />
+							<br />
+							App.getView().getRegion( "page1Region" ).show( mdView );<br />
+							PeopleCollectionInstance.fetch();
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="background-color: #fff; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Form View</h2>
+					<p>A Marionette View that provies input form functionality. It automatically validates the model and shows errors to the user. It automatically attaches Bootsrtap date picker to elements with class of "datepicker". Connects handling for form save and cancel as well as input click and change.</p>
+					<a href="#fromInfo" class="btn btn-sm btn-info" data-toggle="collapse">
+						View Info
+					</a>
+					<a href="http://shemp:7990/projects/WT/repos/frankenstein/browse/views/form/view.js?at=refs%2Ftags%2Fv0.1.0" target="_blank" class="btn btn-sm btn-default">
+						View Code
+					</a>
+					<div id="fromInfo" class="collapse">
+						<h3>Properties</h3>
+						<dl>
+							<dt>model</dt>
+								<dd>The Backbone.Model that conects to the form</dd>
+							<dt>template</dt>
+								<dd>A compiled template that will display the attributes of the Model in a form</dd>
+							<dt>unchangeOnCancel</dt>
+								<dd>Set this to true and upon cancel the form control will set the models attribtues back to what they were at the last form render.</dd>
+						</dl>
+						<h3>Methods</h3>
+						<dl>
+							<dt>rerender()</dt>
+								<dd>Re-render the form control's view</dd>
+							<dt>toggleEdit()</dt>
+								<dd>Toggles between showing .edit and .notedit classed elements</dd>
+							<dt>enableSave() / disableSave()</dt>
+								<dd>Enable/disable the save button</dd>
+							<dt>toggleEdit()</dt>
+								<dd>Toggles between showing .edit and .notedit classed elements</dd>
+							<dt>addDatepicker()</dt>
+								<dd>Adds datepicker control to elements with .datepicker class</dd>
+						</dl>
+						<h3>Template Conventions</h3>
+						<dl>
+							<dt>.toggleEdit</dt>
+								<dd>Put this class on the element you want activate a display toggle of items with class "edit" and "notedit"</dd>
+							<dt>.save</dt>
+								<dd>Put this class on the element you want to trigger onSave and "save" event</dd>
+							<dt>[input's id]</dt>
+								<dd>Make each input's id attribute the same as the model's attribute name to make data changes super easy inside onInputChange.</dd>
+							<dt>.cancel</dt>
+								<dd>Put this class on the element you want to trigger onCancel and "cancel" event</dd>
+							<dt>.complete</dt>
+								<dd>Put this class on the element you want to trigger onComplete and "complete" event</dd>
+							<dt>.datepicker</dt>
+								<dd>Put this class on the element you want to add a bootstrap datepicker to</dd>
+							<dt>data-date-picker-options</dt>
+								<dd>
+									Use this attribut on the .datepicker element to provide 
+									<a href="https://bootstrap-datepicker.readthedocs.io/en/latest/options.html" target="_blank">datepicker configuration</a>
+								</dd>
+						</dl>
+						<pre>
+							&lt;a href="#" class="btn btn-success save">Save&lt;/a><br />
+							&lt;a href="#" class="btn btn-primary complete">Complete&lt;/a><br />
+							&lt;a href="#" class="btn btn-danger cancel">Cancel&lt;/a><br />
+							&lt;div class="input-group date datepicker" data-date-picker-options='{ "format": "mm/yyyy", "minViewMode": 1 }'>
+						</pre>
+						<h3>Events</h3>
+						<dl>
+							<dt>save</dt>
+								<dd>
+									Triggered when .save is clicked
+									<br />
+									<strong>Delivered parameters</strong>
+									<ol>
+										<li>Backbone.Model in use</li>
+									</ol>
+								</dd>
+							<dt>complete</dt>
+								<dd>
+									Triggered when .complete is clicked
+									<br />
+									<strong>Delivered parameters</strong>
+									<ol>
+										<li>Backbone.Model in use</li>
+									</ol>
+								</dd>
+							<dt>cancel</dt>
+								<dd>
+									Triggered when .cancel is clicked
+									<br />
+									<strong>Delivered parameters</strong>
+									<ol>
+										<li>Marionette.View of Form Control</li>
+									</ol>
+								</dd>
+							<dt>input:change</dt>
+								<dd>
+									Triggers when an input, select, or textarea element value chagnes
+									<br />
+									<strong>Delivered parameters</strong>
+									<ol>
+										<li>Marionette.View of item</li>
+										<li>DOM Element which changed</li>
+									</ol>
+								</dd>
+							<dt>input:click</dt>
+								<dd>
+									Triggers when an input, select, or textarea element is clicked
+									<br />
+									<strong>Delivered parameters</strong>
+									<ol>
+										<li>Marionette.View of item</li>
+										<li>DOM Element which changed</li>
+									</ol>
+								</dd>
+							<dt>input:keyup</dt>
+								<dd>
+									Triggers when an input, select, or textarea element is typed into
+									<br />
+									<strong>Delivered parameters</strong>
+									<ol>
+										<li>Marionette.View of item</li>
+										<li>DOM Element which changed</li>
+									</ol>
+								</dd>
+							<dt>input:blur</dt>
+								<dd>
+									Triggers when an input, select, or textarea element has focus removed
+									<br />
+									<strong>Delivered parameters</strong>
+									<ol>
+										<li>Marionette.View of item</li>
+										<li>DOM Element which changed</li>
+									</ol>
+								</dd>
+							<dt>input:focus</dt>
+								<dd>
+									Triggers when an input, select, or textarea element gains focus
+									<br />
+									<strong>Delivered parameters</strong>
+									<ol>
+										<li>Marionette.View of item</li>
+										<li>DOM Element which changed</li>
+									</ol>
+								</dd>
+						</dl>
+						<pre>
+						var Form_View = new (Marionette.View.extend({<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;template: FormTemplate<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;,model: model<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;,behaviors: [<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;behaviorClass: FormBehavior<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;,onInputChange: function( view , el ) {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;view.model.set( el.id , el.value );<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;,onSave: function( model ) {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var self = this;<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model.save( null , { <br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: function( model ) {<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;App.trigger( "success" , "Form was saved" );<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.rerender();<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						}));
+						</pre>
+						<h3>Model Validation</h3>
+						<dl>
+							<dt>validation</dt>
+								<dd>If the model requires "validation" and declares validation rules based on Backbone.Validation library <strong>FormView will do the rest</strong>.</dd>
+						</dl>
+						<pre>
+							define(["validation"],<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;function() {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var Type = Backbone.Model.extend({<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;validation: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SomeAttribute: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required: true<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Type;<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							);
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="background-color: #eee; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Bootstrap Wizard View</h2>
+					<p>A Marionette View that enables a Bootstrap Wizard</p>
+					<a href="#wizardInfo" class="btn btn-sm btn-info" data-toggle="collapse">
+						View Info
+					</a>
+					<a href="http://shemp:7990/projects/WT/repos/frankenstein/browse/views/wizard/view.js?at=refs%2Ftags%2Fv0.1.0" target="_blank" class="btn btn-sm btn-default">
+						View Code
+					</a>
+					<div id="wizardInfo" class="collapse">
+						<h3>Properties</h3>
+						<dl>
+							<dt>template</dt>
+								<dd>A compiled HTML template for the Bootstrap Wizard. It basically needs to be just like <a href="http://vinceg.github.io/twitter-bootstrap-wizard/#" target="_blank">their examples</a>. Then you can also make a tab a region that you can add other views into.</dd>
+							<dt>tabToFarthest (true/false)</dt>
+								<dd>Restricts navigation by tab to only tabs that have already been viewed</dd>
+							<dt>tabPrevOnly (true/false)</dt>
+								<dd>Restricts navigation by tab to only tabs before the currently viewed tab</dd>
+							<dt>config</dt>
+								<dd>Normal <a href="http://vinceg.github.io/twitter-bootstrap-wizard/#docs" target="_blank">Bootstrap Wizard config</a></dd>
+							<dt>template element with class "progress-bar"</dt>
+								<dd>The behavior will automatically run the progress bar</dd>
+						</dl>
+						<h3>Bootstrap Wizard Method Access</h3>
+						<dl>
+							<dt>WizardView.$el.bootstrapWizard( 'next' );</dt>
+								<dd>Calls the next method</dd>
+						</dl>
+						<pre>
+							var WizardView = new (Marionette.View.extend({<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;template: WizardTemplate<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,regions: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tab2: "#tab2"<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,tab3: "#tab3"<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,behaviors: [<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;behaviorClass: WizardBehavior<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,tabToFarthest: true<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,config: {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'nextSelector': '.wnext'<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,'previousSelector': '.cancel,.wprev'<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,onTabChange: function() {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log( "TAB CHANGE" );<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,onTabClick: function() {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log( "TAB CLICK" );<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;,onPreventTab: function( curIdx , newIdx ) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;App.trigger( "error" , "You may only proceed to the next tab." );<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							}));<br />
+							App.getView().getRegion( "page1Region" ).show( Wizard );<br />
+							WizardView.getRegion( "tab2" ).show( Form_Person );<br />
+							WizardView.getRegion( "tab3" ).show( Form_Company );
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="background-color: #fff; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Stated View</h2>
+					<p>An extendable view that takes several views and provides easy ability to show one at a time.</p>
+					<a href="#statedInfo" class="btn btn-sm btn-info" data-toggle="collapse">
+						View Info
+					</a>
+					<a href="http://shemp:7990/projects/WT/repos/frankenstein/browse/views/stated/view.js?at=refs%2Ftags%2Fv0.1.0" target="_blank" class="btn btn-sm btn-default">
+						View Code
+					</a>
+					<div id="statedInfo" class="collapse">
+						<h3>Properties</h3>
+						<dl>
+							<dt>template</dt>
+								<dd>A layout template that creates a div for each of views</dd>
+							<dt>views</dt>
+								<dd>Array of Marionette.Views to display. 
+						</dl>
+						<h3>Methods</h3>
+						<dl>
+							<dt>showState( intState )</dt>
+								<dd>Shows the view at that index of the views array previously provided and hides the currently showing view</dd>
+							<dt>next()</dt>
+								<dd>Shows the next view and hides the currently showing view. Automatically returns to state 0 if you have gone too far</dd>
+						</dl>
+						<pre>
+							var statedView = new (StatedView.extend({<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;template: _.template( '&lt;div class="statedContainer"&gt;&lt;% for( var i = 0; i &lt; stateCount; i++ ) { %&gt;&lt;div class="state&lt;%= i %&gt;"&gt;&lt;%= i %&gt;&lt;/div&gt;&lt;% } %&gt;&lt;/div&gt;' )<br />
+								&nbsp;&nbsp;&nbsp;&nbsp;,views: [ ActionFormControl , basicView , Form_TypeControl ]<br />
+							}));
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,97 @@
+<!--<div class="container colored-border">
+</div>
+
+<div class="row">
+-->
+	<div class="card">
+		<header>
+			<% if( justSaved ) { %>
+				<div class="pull-right" style="font-size: 25px;">
+					<i class="glyphicon glyphicon-check"></i>
+					&nbsp;&nbsp;
+					Assigned
+				</div>
+			<% } %>
+			<h2><%= LeaseNumber %></h2>
+		</header>
+		<div>
+			<div class="row">
+				<div class="col-xs-6 label">Lease Status</div>
+				<div class="col-xs-6"><%= LeaseStatus %></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 label">Lease Category</div>
+				<div class="col-xs-6"><%= Category %></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 label">Payment Frequency</div>
+				<div class="col-xs-6"><%= PaymentFrequency || "n/a" %></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 label">Periodic Payment Amount</div>
+				<div class="col-xs-6"><%= PeriodicPaymentAmount || "n/a" %></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 label">Auto Bill</div>
+				<div class="col-xs-6"><%= AutoBillFlag || "n/a" %></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 label">Control Numbers</div>
+				<div class="col-xs-6">
+					<% if( ControlNums.length == 0 || !ControlNums[ 0 ].ControlNumber ) { %>
+						<div class="row">
+							<div class="col-xs-12">
+								n/a
+							</div>
+						</div>
+					<% } else { %>
+					<%= ControlNums.length %>
+						<% $.each( ControlNums , function( idx , c ) { %>
+							<%= c.ControlNumber %><br />
+						<% }); %>
+					<% } %>
+				</div>
+			</div>
+			<hr class="edit" />
+			<div class="row edit">
+				<div class="col-xs-4">
+					<label>GLA Codes</label>
+				</div>
+				<div class="col-xs-8">
+					<label>Allocations %</label>
+				</div> 
+			</div>
+			<% if( GLAs.length == 0 ) { %>
+				<div class="row edit">
+					<div class="col-xs-12">
+						There are no GLAs for this Lease
+					</div>
+				</div>
+			<% } else { %>
+				<% $.each( GLAs , function( idx , g ) { %>
+					<div class="row edit">
+						<label for="allocations<%= g.RentalGLACode %>" class="col-xs-4">
+							<%= g.RentalGLACode %>
+						</label>
+						<div id="allocations<%= g.RentalGLACode %>" class="col-xs-8">
+							<div class="form-group label-floating <%= g.Percent == 0 ? "is-empty" : "" %>">
+								<label class="control-label">Allocation %</label>
+								<input type="text" id="<%= g.RentalGLACode %>" name="<%= g.RentalGLACode %>" value="<%= g.Percent == 0 ? "" : g.Percent %>" class="form-control" />
+								<span class="material-input"></span>
+							</div>
+						</div>
+					</div>
+				<% }); %>
+			<% } %>
+		</div>
+		<footer>
+			<a href="#" class="btn btn-warning notedit toggleEdit pull-right">Edit GLA Allocation</a>
+			<a href="#" class="btn btn-danger edit toggleEdit pull-left">Cancel</a>
+			<a href="#" class="btn btn-primary saveItem edit pull-right">Save GLA Allocations</a>
+			<br style="clear: both;" />
+		</footer>
+	</div>
+	<br />
+		<!--
+</div>
+-->

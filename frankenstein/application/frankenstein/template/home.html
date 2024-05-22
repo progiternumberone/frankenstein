@@ -1,0 +1,183 @@
+<style type="text/css">
+	.helpTemplate {
+		font-size: 14px;
+	}
+	.helpTemplate dd {
+		margin: 0 0 10px 20px;
+	}
+	.jumbotron , .jumbotron h2 {
+		background-color: #9c8b5d;
+		color: white;
+	}
+</style>
+<div class="helpTemplate">
+<div class="row" style="background-color: #fff; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Frankenstein Application</h2>
+					<p>Frankenstein is an application that will provide reusable functionality and data entities for faster app development.</p>
+					<a class="btn btn-lg btn-default" href="http://shemp:7990/projects/WT/repos/frankenstein/browse" target="_blank">View in GIT</a>
+					<br />
+					<br />
+					<h3>How to add to your project</h3>
+					<p>
+						Include Frankenstein by adding the following script tags on your HTML page.
+					</p>
+					<textarea style="white-space: pre; overflow-wrap: normal; overflow-x: auto; width: 100%;" onclick="this.select();">
+					&lt;script type="text/javascript" src="[path-to-your-app]/js/frankenstein-config.js"&gt;&lt;/script&gt;
+					&#13;&#10;
+					&lt;script type="text/javascript" src="http://devcf.glo.texas.gov/frankenstein/js/lib/require.js" data-main="http://devcf.glo.texas.gov/frankenstein/js/require-config"&gt;&lt;/script&gt;
+					</textarea>
+					<h3>Files to create in your application</h3>
+					<p>
+						<ul style="margin-left: 40px;">
+							<li>/js/frankenstein-config.js - configuration of location of your JS and template folders</li>
+							<li>/js/businessLogic.js - application controller that ties your business logic to the controls and entities provided by Frankenstein</li>
+							<li>/js/routes.js - set the URL paths to functions in businessLogic.js</li>
+							<li>/js/layout.js - controls your applications layout</li>
+							<li>/template/... - folder with HTML templates that will render in your application's UI</li>
+						</ul>
+						<% if( window.location.href.indexOf( "/application/" ) > -1 ) { %>
+							<a href="../quickstart.zip" target="_blank" class="btn btn-primary">Download Quick Start Files</a>
+						<% } else {%>
+							<a href="application/quickstart.zip" target="_blank" class="btn btn-primary">Download Quick Start Files</a>
+						<% } %>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row" style="background-color: #fff; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Basic View Creation</h2>
+					<p>To output simple content use a default marionette view</p>
+					<!--
+					<a href="#basicView" class="btn btn-sm btn-info" data-toggle="collapse">
+						View Info
+					</a>
+					-->
+					<div id="basicView" class="collapsex">
+						businessLogic.js
+						<pre>
+							showNav: function( activeClassId ) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;require([ "tpl!template/nav.html" ], function ( template ) {<br />
+							<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;App.getView().showChildView( "pageNavRegion" , new Marionette.View( { template: template } ) );<br />
+							<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;});<br />
+							}
+						</pre>
+						<br />
+						template/nav.html
+						<pre>
+							&lt;h1>Mineral Award GLO3 Reporting&lt;/h1><br />
+							&lt;ul class="nav nav-tabs"><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;li role="presentation" class="reports">&lt;a href="#mineralAward/report">Incomplete Reports&lt;/a>&lt;/li><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;li role="presentation" class="new">&lt;a href="#mineralAward/company">New Report&lt;/a>&lt;/li><br />
+							&lt;/ul>
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--
+<div class="row" style="background-color: #eee; padding: 40px 0;">
+	<div class="col-xs-12">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Form View</h2>
+					<p>Easily make a form to edit your data</p>
+					<div id="formView" class="collapsex">
+						businessLogic.js
+						<pre>
+							/*<br />
+							routes.js<br />
+							...<br />
+							appRoutes: { ... ,"company": "showCompany" ... }<br />
+							...<br />
+							*/<br />
+							/*#company*/<br />
+							showCompany: function( ban ) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;require(["form/behavior" , "data/CompanyInstance" , "tpl!template/form.html" ], <br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function( FormBehavior , CompanyInstance , template ) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*set up the form control*/<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var Form_Company = new (Marionette.View.extend({<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model: CompanyInstance<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,template: template<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,behaviors: [<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;behaviorClass: FormBehavior<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,unchangeOnCancel: true<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,onSave: function( model ) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model.save();<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,onCancel: function( view ) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;App.navigate( "report/" + view.model.get( "ban" ) );<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,onInputChange: function( view , el ) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;view.model.set( el.id , el.value );<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}));<br />
+							<br />
+							<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*fetch data*/<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompanyInstance.set( { "BAN": ban } ).fetch({<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: function() {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*show control*/<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;App.getView()getRegion( "page1Region" ).show( Form_Company );<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;);<br />
+							}
+						</pre>
+						<br />
+						template/MineralAwardCompany_form.html
+						<pre>
+							&lt;form class="form-horizontal"><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="form-group"><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;label for="BAN" class="col-sm-3 control-label">BAN&lt;/label><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="col-sm-9"><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="BAN" type="text" value="&lt;%= BAN %>" class="form-control" /><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="form-group"><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;label for="ReceivedDate" class="col-sm-3 control-label">Received Date&lt;/label><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="col-sm-9"><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="input-group date datepicker"><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="input-group-addon">&lt;i class="glyphicon glyphicon-calendar">&lt;/i>&lt;/div><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="ReceivedDate" value="&lt;%= ReceivedDate %>" class="form-control" placeholder="01/01/2020" /><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="form-group"><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;label class="col-sm-3 control-label">&nbsp;&lt;/label><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="col-sm-9"><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button type="submit" class="btn btn-success save">Submit&lt;/button><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="#mineralAward" class="btn btn-default cancel">Cancel&lt;/a><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div><br />
+							&lt;/form>
+
+						</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+</div>

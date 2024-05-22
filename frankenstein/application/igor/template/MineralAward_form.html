@@ -1,0 +1,85 @@
+<br />
+<div class="panel panel-default">
+	<div class="panel-heading"><h4>New Mineral Award Record</h4></div>
+	<div class="panel-body">
+		<!--
+		<div class="notedit">
+			<a class="btn btn-primary save">Save MA-3 Report</a>
+			<a class="btn btn-warning complete">Complete MA-3 Report</a>
+		</div>
+		-->
+		<div class="notedit">
+		
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="leaseNumber" class="col-sm-4 control-label">Lease Number</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							<div class="input-group-addon">HM</div>
+							<input id="leaseNumber" type="text" value="<%= leaseNumber.replace( "HM" , "" ) %>" class="form-control" placeholder="123456" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="reportProductType" class="col-sm-4 control-label">Report Product Type</label>
+					<div class="col-sm-8">
+						<select id="reportProductType" class="form-control">
+							<option value="">Select a Product Type</option>
+							<option value="SULPHUR" <%= ( reportProductType == "SULPHUR" ? "selected" : "" ) %>>
+								Sulphur</option>
+							<option value="PSF COAL" <%= ( reportProductType == "COAL" || reportProductType == "PSF COAL" ? "selected" : "" ) %>>
+								Coal</option>
+							<option value="PSF LIGNITE" <%= ( reportProductType == "LIGNITE" || reportProductType == "PSF LIGNITE" ? "selected" : "" ) %>>
+								Lignite</option>
+							<option value="FLUORSPAR" <%= ( reportProductType == "FLUORSPAR" ? "selected" : "" ) %>>
+								Fluorspar</option>
+							<option value="TALC" <%= ( reportProductType == "TALC" ? "selected" : "" ) %>>
+								Talc</option>
+							<option value="URANIUM" <%= ( reportProductType == "URANIUM" ? "selected" : "" ) %>>
+								Uranium</option>
+							<option value="SAND, GRAVEL, CLAY," <%= ( reportProductType == "SAND, GRAVEL, CLAY," ? "selected" : "" ) %>>
+								Sand, Gravel, Clay, Limestone, Rock, Timber</option>
+							<option value="HWY ROW HARD MINERAL" <%= ( reportProductType == "HWY ROW HARD MINERAL" ? "selected" : "" ) %>>
+								Hwy ROW Hard Mineral</option>
+							<option value="OTHER PSF HARD MINER" <%= ( reportProductType == "OTHER PSF HARD MINER" ? "selected" : "" ) %>>
+								Other PSF Hard Mineral</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="glaCode" class="col-sm-4 control-label">GLA Code</label>
+					<div class="col-sm-8">
+						<input id="glaCode" value="<%= glaCode %>" class="form-control" disabled />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="productionYearMonth" class="col-sm-4 control-label">Production Month/Year</label>
+					<div class="col-sm-8">
+						<div class="input-group date datepicker" data-date-picker-options='{ "format": "mm/yyyy", "minViewMode": 1 }'>
+							<div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+							<input id="productionYearMonth" value="<%= productionYearMonth %>" class="form-control" placeholder="05/2016" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="paymentAmount" class="col-sm-4 control-label">Payment  Amount</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></div>
+							<input id="paymentAmount"value="<%= paymentAmount %>" class="form-control" placeholder="Amount" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label">&nbsp;</label>
+					<div class="col-sm-8">
+						<button type="submit" class="btn btn-success save">Submit</button>
+						<% if( ! cancelNotAllowed ) { %>
+							<button class="btn btn-default cancel">Cancel</button>
+						<% } %>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

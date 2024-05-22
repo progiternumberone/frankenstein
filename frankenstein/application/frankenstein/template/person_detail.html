@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Person Information</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-6" style="text-align: right;">
+				<label>Name</label>
+			</div>
+			<div class="col-xs-6">
+				<%= FName %> <%= LName %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6" style="text-align: right;">
+				<label>Program Area</label>
+			</div>
+			<div class="col-xs-6">
+				<%= Program %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6" style="text-align: right;">
+				<label>GLO Directory</label>
+			</div>
+			<div class="col-xs-6">
+				<a target="_blank" href="/Zion/ZionPortfolio.cfm?emp=<%= EmployeeID %>">View in Directory</a>
+			</div>
+		</div>
+	</div>
+</div>
+<button class="exit test btn btn-default">Return to List</button>
